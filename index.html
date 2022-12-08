@@ -1,0 +1,36 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: wangLei
+ * @Date: 2022-12-09 00:03:50
+ * @LastEditors: wangLei
+ * @LastEditTime: 2022-12-09 00:22:34
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.登录页面 这个页面在http://192.168.0.104：8080端口下
+        let token='这是本地需要缓存的信息';
+        let iframe=document.createElement('iframe');
+        iframe.style.display="none";
+        iframe.src="中间代理.html";
+        document.body.appendChild(iframe);
+        iframe.onload=function(e){
+            iframe.contentWindow.postMessage(token,"http://192.168.0.104:8081");
+        }
+        //2.中间代理.html   http://192.168.0.104:8081
+        window.addEventListener('message',(e)=>{
+            localStorage.setItem('http://192.168.0.104:8081/index2.html','_blank');
+        },false)
+        //3.获取储存页面  http://192.168.0.104:8081/index2.html
+
+    </script>
+</body>
+</html>
